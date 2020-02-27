@@ -43,14 +43,14 @@ function setCurrentDay(weather) {
     var newHumidity = $("<p>");
     var newWind = $("<p>");
     
-    newCity.text(weather.name + " " + moment().format("MMM Do YYYY")).append("<img id=fiveDay Icon src=http://openweathermap.org/img/wn/" + weather.weather[0].icon + "@2x.png>");
+    newCity.text(weather.name + " " + moment().format("MMM Do YYYY")).append("<img id=fiveDay Icon src=https://openweathermap.org/img/wn/" + weather.weather[0].icon + "@2x.png>");
     newTemp.text("Temperature: " + ((weather.main.temp * 9/5) - 459.67).toFixed(2) + "°F");
     newHumidity.text("Humidity: " + weather.main.humidity + "%");
     newWind.text("Wind Speed " + weather.wind.speed + "MPH");
     newLi.append(newCity, newTemp, newHumidity, newWind);
     //need a seperate api to display UV index
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/uvi?appid=0c2a6e113a8152cfb400899caf93b5b1&lat=" + weather.coord.lat + "&lon=" + weather.coord.lon,
+        url: "https://api.openweathermap.org/data/2.5/uvi?appid=0c2a6e113a8152cfb400899caf93b5b1&lat=" + weather.coord.lat + "&lon=" + weather.coord.lon,
         method: "GET"
     }).then(function(UV) {
         var newUV = $("<p>");
@@ -92,7 +92,7 @@ function setFiveDay(five) {
         var fiveIcon = $("<p>").attr("class", "card-text");
         fiveDate.text(fiveDayArray[i].dt_txt);
         //open weather has built-in icons - I can capture the icon value via ajax
-        fiveIcon.append("<img id=fiveDay Icon src=http://openweathermap.org/img/wn/" + fiveDayArray[i].weather[0].icon + "@2x.png>");
+        fiveIcon.append("<img id=fiveDay Icon src=https://openweathermap.org/img/wn/" + fiveDayArray[i].weather[0].icon + "@2x.png>");
         fiveTemp.text("Temp: " + ((fiveDayArray[i].main.temp * 9/5) - 459.67).toFixed(2) + "°F");
         fiveHumidity.text("Humidity: " + fiveDayArray[i].main.humidity + "%");
         
@@ -113,8 +113,8 @@ function setApiURL(event) {
     if (event.data.parameterLabel === "label") {
         userCity = $(this).text();
     }
-    var currentDayURL = "http://api.openweathermap.org/data/2.5/weather?q=" + userCity + "&APPID=0c2a6e113a8152cfb400899caf93b5b1";
-    var fiveDayURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + userCity + "&APPID=0c2a6e113a8152cfb400899caf93b5b1";
+    var currentDayURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userCity + "&APPID=0c2a6e113a8152cfb400899caf93b5b1";
+    var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + userCity + "&APPID=0c2a6e113a8152cfb400899caf93b5b1";
    
     //each ajax call has the unique url that cooresponds to the function call (current day or five day forecast)
     $.ajax({
